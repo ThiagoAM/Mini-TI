@@ -1,0 +1,331 @@
+/*
+
+*/
+
+
+/* ---- GERAL ---- */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	margin:0;
+	padding:0;
+	height:100%;
+	background-color: white;
+}
+
+body:hover {
+    cursor: default;
+}
+
+p {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: white;
+	font-weight: 300;
+}
+
+input[type=text], input[type="password"] {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+    padding-top: 1%;
+    padding-bottom: 1%; 
+    border:2px solid white; 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus, input[type="password"]:focus {    
+    background-color: #E0F7FA;
+    border-color: #E0F7FA;
+}
+
+input[type=submit] {
+
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	position: relative;   
+    padding-top: 1.7%;
+    padding-bottom: 1.7%;
+    
+    background:#294C5D; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+
+    width: 25%;
+    left: 37.5%;
+
+    font-size: 1.25vw;    
+	margin-top: 1.75%;    
+
+    color: white;
+}	
+
+span {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	position: absolute;
+	font-size: 1.25vw;
+	color: white;	
+}
+
+
+
+/* ---- DIVS ---- */
+
+
+.balaoMsg {
+
+	position: absolute;
+	top: 0.65vw;
+	width: 19.5vw;
+	height: 3.3vw;
+	left: 4.0vw;
+	background-color: #6A9D80;
+	-webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    text-align: center;
+    display: flex;
+	justify-content: center; 
+	align-items: center; 
+}	
+	.balaoMsg.erro {
+		background-color: #E53935;		
+	}
+
+
+
+
+/* ---- CLASSES ---- */
+
+.caixaInterface {
+	position: absolute;	
+	background-color: #607D8B;
+    -webkit-border-radius: 10px;
+}
+	.caixaInterface.login {		
+		width: 40%;		
+		left: 30%;		
+		padding-top: 2.5%;				
+		height: 17.75vw;
+		top: 25%;					  
+	}
+	.caixaInterface.cadastro {	
+		width: 40%;
+		left: 30%;		
+		padding-top: 2.5%;			
+		height: 32.5vw;
+		top: 14.375%;					  
+	}
+	.caixaInterface.sistema {		
+		background-color: #EEEEEE;
+		width: 70%;
+		left: 15%;		
+		height: 47vw;
+		top: 9%;
+	}
+		.cabecalhoSistema {
+			position: absolute;
+			width: 100%;
+			height: 7.5%;
+			background-color: #607D8B;
+			
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			top: 0;
+		}
+
+			p.bemVindo {
+				position: absolute;				
+				font-size: 1.35vw;
+				line-height: 265%;
+				left: 1.5%;
+			}
+
+			.botao.sair {
+				position: absolute;
+				font-size: 1.0vw;
+				background-color: #416475;
+				right: 0%;
+				width: 7.5%;
+				height: 100%;
+				top: 0%;
+				border-top-left-radius: 0px;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 0px;
+				border-bottom-left-radius: 10px;
+			}
+
+		.abaInfoSistema {
+			position: absolute;
+			width: 100%;
+			height: 5%;
+			top: 7.5%;
+			background-color: #607D8B;
+		}
+			.abaInfoSistema p {
+				position: absolute;				
+				font-size: 1.0vw;
+				line-height: 230%;
+				left: 1.5%;
+			}			
+
+		.oqDesejaFazer p {			
+			font-weight: 100;
+			position: absolute;
+			width: 100%;
+			height: 15.5%;
+			color: #607D8B;			
+			font-size: 3.5vw;
+			top: 12.5%;
+			text-align: center;
+	    	display: flex;
+			justify-content: center; 
+			align-items: center; 
+
+			
+    		border-bottom: thin solid #607D8B;    		
+		}
+
+		.caixaItensSistema {			
+			position: absolute;			
+			width: 100%;
+			height: 72.0%;
+			top: 28%;
+			/*background-color: #CFD8DC;*/
+			border-bottom-right-radius: 10px;
+			border-bottom-left-radius: 10px;
+		}
+			.botaoItemOqDesejaFazer {	
+				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				font-weight: 200;			
+				color: white;
+				font-size: 1.25vw;				
+				background-color: #6D7297;
+				width: 17.5%;
+				height: 15%;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				border-bottom-left-radius: 10px;
+				border:0 none;
+    			cursor:pointer;				
+			}					
+				.botaoItemOqDesejaFazer.editarMinhaConta {
+					position: absolute;
+					left: 1.5%;
+					top: 3%;
+				}
+				.botaoItemOqDesejaFazer.acessarOForum {
+					background-color: #607D8B;
+					position: absolute;
+					left: 20.5%;
+					top: 3%;
+				}
+
+
+			
+
+	.caixaInterface.erro {
+
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+		font-size: 2vw;    	   
+		color: white;
+		background-color: #C62828;
+		width: 40%;		
+		left: 30%;							
+		/*height: 17.75vw;*/
+		height: 14vw;
+		top: 25%;	
+		padding-bottom: 3%;				  
+
+		text-align: center;
+	    display: flex;
+		justify-content: center; 
+		align-items: center; 
+	}
+
+
+
+.campoDeEntrada {
+	position: relative;	
+	width: 82.5%;		
+	left: 8.75%;
+	font-size: 1.5vw;
+	margin-top: 2.25%;
+}
+
+.botao {
+
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+    background-color: #01579B; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    font-size: 1.25vw;    	   
+    color: white;   
+}
+
+	.botao.botaoCadastrese {
+		width: 25%;
+    	left: 37.5%;
+    	margin-top: 1.75%; 
+    	padding-top: 1.7%;
+    	padding-bottom: 1.7%;
+		position: relative;
+		background-color: #416475;
+	}
+	.botao.botaoVoltar {
+		width: 25%;
+    	left: 37.5%;
+    	margin-top: 1.75%; 
+    	padding-top: 1.7%;
+    	padding-bottom: 1.7%;
+		position: relative;
+		background-color: #416475;
+	}
+
+	.botao.botaoVoltarInterfaceErro {
+		width: 25%;
+    	left: 37.5%;
+    	margin-top: 1.75%; 
+    	padding-top: 1.7%;
+    	padding-bottom: 1.7%;
+		position: absolute;
+		bottom: 5%;
+		background-color: #01579B;
+	}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
