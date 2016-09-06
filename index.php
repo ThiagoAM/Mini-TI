@@ -55,14 +55,29 @@
 			}
 		}
 		if (($msgErroEmail == "") && ($msgErroSenha == "")) {
-			if (tentaLoginComoCliente($email, $senha)) {
+
+			$fezLogin = tentaLoginComoCliente($email, $senha);
+
+			if ($fezLogin === true) {
+				// Sucesso no login:
+				mudaDePagina("sistema.php");
+				exit();
+			} else if ($fezLogin === false) {
+				// Falha no login:
+				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
+			} else if ($fezLogin === null) {
+				// Falha no login:
+				$msgErroLogin = "Não foi possível conectar ao servidor, volte mais tarde!";
+			}
+
+			/*if (tentaLoginComoCliente($email, $senha)) {
 				// Sucesso no login:
 				mudaDePagina("sistema.php");
 				exit();
 			} else {
 				// Falha no login:
 				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
-			}
+			}*/
 		}
 	}
 ?>

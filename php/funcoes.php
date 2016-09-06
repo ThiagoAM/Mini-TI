@@ -39,7 +39,8 @@
 				// Falha na criação do comando SQL:
 				return false;
 			}
-			$comandoSQL->bind_param('sssss', $nome, $email, $senha, $telefone, $endereco);
+			$senhaCriptografada = criptografarSenha($senha);
+			$comandoSQL->bind_param('sssss', $nome, $email, $senhaCriptografada, $telefone, $endereco);
 			$comandoSQL->execute();
 			$comandoSQL->close();
 			mysqli_close($conexao);
@@ -47,28 +48,45 @@
 		}
 	}
 
+	function criptografarSenha($senha) {
+		return password_hash($senha, PASSWORD_DEFAULT);
+	}
+
+	function verificaSeSenhaEstaCorreta($senha, $senhaCriptografada) {
+		if (password_verify($senha, $senhaCriptografada)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	function tentaLoginComoCliente($email, $senha) {
 		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
 		// Verifica conexão:
 		if (!$conexao) {
 			// Falha na conexão:
-			return false;
+			return null;
 		} else {
 			// Sucesso na conexão:
-			$comandoSQL = $conexao->prepare('SELECT * FROM clientes WHERE email = ? AND senha = ?');
+			$comandoSQL = $conexao->prepare('SELECT * FROM clientes WHERE email = ?');
 			if (!$comandoSQL) {
 				return false;
 			}
-			$comandoSQL->bind_param('ss', $email, $senha);
+			$comandoSQL->bind_param('s', $email);
 			$comandoSQL->execute();
 			$resultadoSQL = $comandoSQL->get_result();
 			if ($resultadoSQL->num_rows === 1) {
 				$coluna = $resultadoSQL->fetch_assoc();
-				iniciaEAtribuiValoresSessao($coluna["idCliente"], $coluna["nome"], $coluna["email"], $coluna["senha"], $coluna["telefone"], $coluna["endereco"]);
-				$comandoSQL->close();
-				mysqli_close($conexao);
-				return true;
+				if (verificaSeSenhaEstaCorreta($senha, $coluna["senha"])) {
+					iniciaEAtribuiValoresSessao($coluna["idCliente"], $coluna["nome"], $coluna["email"], $coluna["senha"], $coluna["telefone"], $coluna["endereco"]);
+					$comandoSQL->close();
+					mysqli_close($conexao);
+					return true;
+				} else {
+					$comandoSQL->close();
+					mysqli_close($conexao);
+					return false;
+				}
 			} else {
 				$comandoSQL->close();
 				mysqli_close($conexao);
