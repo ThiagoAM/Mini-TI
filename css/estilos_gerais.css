@@ -31,13 +31,13 @@ input[type=text], input[type="password"] {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 300;
     padding-top: 1%;
-    padding-bottom: 1%; 
-    border:2px solid white; 
+    padding-bottom: 1%;
+    border:2px solid white;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
-input[type=text]:focus, input[type="password"]:focus {    
+input[type=text]:focus, input[type="password"]:focus {
     background-color: #E0F7FA;
     border-color: #E0F7FA;
 }
@@ -46,30 +46,30 @@ input[type=submit] {
 
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 300;
-	position: relative;   
+	position: relative;
     padding-top: 1.7%;
     padding-bottom: 1.7%;
-    
-    background:#294C5D; 
+
+    background:#294C5D;
     border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
-    border-radius: 5px; 
+    border-radius: 5px;
 
     width: 25%;
     left: 37.5%;
 
-    font-size: 1.25vw;    
-	margin-top: 1.75%;    
+    font-size: 1.25vw;
+	margin-top: 1.75%;
 
     color: white;
-}	
+}
 
 span {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	position: absolute;
 	font-size: 1.25vw;
-	color: white;	
+	color: white;
 }
 
 
@@ -90,11 +90,11 @@ span {
 
     text-align: center;
     display: flex;
-	justify-content: center; 
-	align-items: center; 
-}	
+	justify-content: center;
+	align-items: center;
+}
 	.balaoMsg.erro {
-		background-color: #E53935;		
+		background-color: #E53935;
 	}
 
 
@@ -103,28 +103,48 @@ span {
 /* ---- CLASSES ---- */
 
 .caixaInterface {
-	position: absolute;	
+	position: absolute;
 	background-color: #607D8B;
     -webkit-border-radius: 10px;
 }
-	.caixaInterface.login {		
-		width: 40%;		
-		left: 30%;		
-		padding-top: 2.5%;				
-		height: 17.75vw;
-		top: 25%;					  
+	.caixaInterface.editarDados {
+		padding-top: 2.5%;
+		/*width: 70%;*/
+		width: 60%;
+		/*left: 15%;*/
+		left: 20%;
+		/*height: 65%;*/
+		height: 60%;
+		background-color: #607D8B;
+		top: 18.75%;
+
 	}
-	.caixaInterface.cadastro {	
+	.caixaInterface.login {
 		width: 40%;
-		left: 30%;		
-		padding-top: 2.5%;			
-		height: 32.5vw;
-		top: 14.375%;					  
+		left: 30%;
+		padding-top: 2.5%;
+		height: 17.75vw;
+		top: 25%;
 	}
-	.caixaInterface.sistema {		
+	.caixaInterface.cadastro {
+		width: 40%;
+		left: 30%;
+		padding-top: 2.5%;
+		height: 32.5vw;
+		top: 14.375%;
+	}
+
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+
+	.caixaInterface.sistema {
 		background-color: #EEEEEE;
 		width: 70%;
-		left: 15%;		
+		left: 15%;
 		height: 47vw;
 		top: 9%;
 	}
@@ -133,14 +153,14 @@ span {
 			width: 100%;
 			height: 7.5%;
 			background-color: #607D8B;
-			
+
 			border-top-left-radius: 10px;
 			border-top-right-radius: 10px;
 			top: 0;
 		}
 
 			p.bemVindo {
-				position: absolute;				
+				position: absolute;
 				font-size: 1.35vw;
 				line-height: 265%;
 				left: 1.5%;
@@ -160,6 +180,10 @@ span {
 				border-bottom-left-radius: 10px;
 			}
 
+			.cabecalhoSistema.editarDadosCadastrais {
+				background-color: #6D7297;
+			}
+
 		.abaInfoSistema {
 			position: absolute;
 			width: 100%;
@@ -168,31 +192,33 @@ span {
 			background-color: #607D8B;
 		}
 			.abaInfoSistema p {
-				position: absolute;				
+				position: absolute;
 				font-size: 1.0vw;
 				line-height: 230%;
 				left: 1.5%;
-			}			
+			}
 
-		.oqDesejaFazer p {			
+		.oqDesejaFazer p {
 			font-weight: 100;
 			position: absolute;
 			width: 100%;
 			height: 15.5%;
-			color: #607D8B;			
+			color: #607D8B;
 			font-size: 3.5vw;
 			top: 12.5%;
 			text-align: center;
 	    	display: flex;
-			justify-content: center; 
-			align-items: center; 
+			justify-content: center;
+			align-items: center;
 
-			
-    		border-bottom: thin solid #607D8B;    		
+
+    		border-bottom: thin solid #607D8B;
 		}
 
-		.caixaItensSistema {			
-			position: absolute;			
+
+
+		.caixaItensSistema {
+			position: absolute;
 			width: 100%;
 			height: 72.0%;
 			top: 28%;
@@ -200,11 +226,11 @@ span {
 			border-bottom-right-radius: 10px;
 			border-bottom-left-radius: 10px;
 		}
-			.botaoItemOqDesejaFazer {	
+			.botaoItemOqDesejaFazer {
 				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				font-weight: 200;			
+				font-weight: 200;
 				color: white;
-				font-size: 1.25vw;				
+				font-size: 1.25vw;
 				background-color: #6D7297;
 				width: 17.5%;
 				height: 15%;
@@ -213,8 +239,8 @@ span {
 				border-bottom-right-radius: 10px;
 				border-bottom-left-radius: 10px;
 				border:0 none;
-    			cursor:pointer;				
-			}					
+    			cursor:pointer;
+			}
 				.botaoItemOqDesejaFazer.editarMinhaConta {
 					position: absolute;
 					left: 1.5%;
@@ -228,32 +254,29 @@ span {
 				}
 
 
-			
+
 
 	.caixaInterface.erro {
-
 		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		font-size: 2vw;    	   
+		font-size: 2vw;
 		color: white;
 		background-color: #C62828;
-		width: 40%;		
-		left: 30%;							
-		/*height: 17.75vw;*/
+		width: 40%;
+		left: 30%;
 		height: 14vw;
-		top: 25%;	
-		padding-bottom: 3%;				  
-
+		top: 25%;
+		padding-bottom: 3%;
 		text-align: center;
 	    display: flex;
-		justify-content: center; 
-		align-items: center; 
+		justify-content: center;
+		align-items: center;
 	}
 
 
 
 .campoDeEntrada {
-	position: relative;	
-	width: 82.5%;		
+	position: relative;
+	width: 82.5%;
 	left: 8.75%;
 	font-size: 1.5vw;
 	margin-top: 2.25%;
@@ -263,19 +286,28 @@ span {
 
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 300;
-    background-color: #01579B; 
+    background-color: #01579B;
     border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
-    border-radius: 5px; 
-    font-size: 1.25vw;    	   
-    color: white;   
+    border-radius: 5px;
+    font-size: 1.25vw;
+    color: white;
 }
+	.botao.excluirConta {
+		width: 25%;
+    	left: 37.5%;
+    	margin-top: 1.75%;
+    	padding-top: 1.7%;
+    	padding-bottom: 1.7%;
+		position: relative;
+		background-color: #934F3D;
+	}
 
 	.botao.botaoCadastrese {
 		width: 25%;
     	left: 37.5%;
-    	margin-top: 1.75%; 
+    	margin-top: 1.75%;
     	padding-top: 1.7%;
     	padding-bottom: 1.7%;
 		position: relative;
@@ -284,7 +316,7 @@ span {
 	.botao.botaoVoltar {
 		width: 25%;
     	left: 37.5%;
-    	margin-top: 1.75%; 
+    	margin-top: 1.75%;
     	padding-top: 1.7%;
     	padding-bottom: 1.7%;
 		position: relative;
@@ -294,7 +326,7 @@ span {
 	.botao.botaoVoltarInterfaceErro {
 		width: 25%;
     	left: 37.5%;
-    	margin-top: 1.75%; 
+    	margin-top: 1.75%;
     	padding-top: 1.7%;
     	padding-bottom: 1.7%;
 		position: absolute;
@@ -303,29 +335,3 @@ span {
 	}
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

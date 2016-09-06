@@ -11,5 +11,5 @@
 	define("SENHA_BD", "root");
 	define("NOME_BD", "bdMiniTI");
 	define("HOSPEDEIRO_BD", "localhost");
-	define("PORTA_BD", 8889);	
+	define("PORTA_BD", 8889);
 ?>

@@ -1,6 +1,6 @@
 <?php
 	include 'php/funcoes.php';
-	include 'php/constantes.php';	
+	include 'php/constantes.php';
 
 	// Variáveis:
 	$nome = $email = $senha = $confirmaSenha = $telefone = $endereco = "";
@@ -14,7 +14,7 @@
 			$msgErroNome = "Nome é requerido!";
 		} else {
 			$nome = trataEntrada($_POST["nome"]);
-			
+
 			if (!verificaSeNomeEValido($nome)) {
 				$msgErroNome = "Nome deve conter apenas LETRAS e ESPAÇOS!";
 			}
@@ -27,16 +27,15 @@
 			$email = trataEntrada($_POST["email"]);
 
 			if (!verificaSeEmailEValido($email)) {
-				$msgErroEmail = "Formato de e-mail inválido!";	
+				$msgErroEmail = "Formato de e-mail inválido!";
 			}
 
 			$emailJaExiste = verificaSeEmailJaExiste($email);
 			if ($emailJaExiste === true) {
 				$msgErroEmail = "Este e-mail já foi cadastrado!";
 			} else if ($emailJaExiste === null) {
-				$msgErroEmail = "Erro no servidor, tente mais tarde!";
+				$msgErroNome = "Erro no servidor, tente novamente mais tarde!";
 			}
-
 		}
 
 		// Verifica se 'senha' e 'confirmaSenha' foram enviadas pelo POST:
@@ -47,7 +46,7 @@
 			$confirmaSenha = trataEntrada($_POST["confirmaSenha"]);
 
 			// Verifica se ambas as senhas são iguais:
-			if ($senha === $confirmaSenha) {				
+			if ($senha === $confirmaSenha) {
 				if (!verificaSeSenhaEValida($senha)) {
 					$msgErroSenha = "Formato de senha inválido!";
 				}
@@ -66,29 +65,32 @@
 			$msgErroEndereco = "Número máximo de caracteres alcançado!";
 		}
 
-		
+
 		// Grava na base de dados:
 		if (verificaSeFormularioEValido($msgErroNome, $msgErroEmail, $msgErroSenha, $msgErroTelefone, $msgErroEndereco)) {
-			
-			// Cria uma conexão:									
-			$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
 
-			// Verifica conexão:
-			if (!$conexao) {
-				// Falha na conexão:
-				die("A conexão com o banco de dados falhou. Erro: " . mysqli_connect_error());
+			if (insereDadosEmCliente($nome, $email, $senha, $telefone, $endereco)) {
+				mudaDePagina("index.php?nome=$nome&email=$email");
 			} else {
-				// Sucesso na conexão:							
-				$comandoSQL = "INSERT INTO clientes (nome, email, senha, telefone, endereco) VALUES ('$nome', '$email', '$senha', '$telefone', '$endereco')";
-				
-				if (!mysqli_query($conexao, $comandoSQL)) {
-	    			echo "<br>Erro ao inserir dados no BD: " . $comandoSQL . "<br>" . mysqli_error($conexao);
-				}
-
-				mysqli_close($conexao); // Encerra a conexão.				
-				mudaDePagina("index.php?nome=$nome&email=$email");					
+				$msgErroNome = "Erro no servidor, tente mais tarde!";
 			}
-		} 
+
+			// // Cria uma conexão:
+			// $conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
+			// // Verifica conexão:
+			// if (!$conexao) {
+			// 	// Falha na conexão:
+			// 	die("A conexão com o banco de dados falhou. Erro: " . mysqli_connect_error());
+			// } else {
+			// 	// Sucesso na conexão:
+			// 	$comandoSQL = "INSERT INTO clientes (nome, email, senha, telefone, endereco) VALUES ('$nome', '$email', '$senha', '$telefone', '$endereco')";
+			// 	if (!mysqli_query($conexao, $comandoSQL)) {
+	    	// 		echo "<br>Erro ao inserir dados no BD: " . $comandoSQL . "<br>" . mysqli_error($conexao);
+			// 	}
+			// 	mysqli_close($conexao); // Encerra a conexão.
+			// 	mudaDePagina("index.php?nome=$nome&email=$email");
+			// }
+		}
 	}
 ?>
 <!DOCTYPE html>
@@ -103,8 +105,8 @@
 <div class="caixaInterface cadastro">
 
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-				
-		<input type="text" name="nome" class="campoDeEntrada" placeholder="nome completo" value="<?php echo $nome;?>" maxlength="<?php echo MAX_CHAR_NOME;?>" required>	
+
+		<input type="text" name="nome" class="campoDeEntrada" placeholder="nome completo" value="<?php echo $nome;?>" maxlength="<?php echo MAX_CHAR_NOME;?>" required>
 		<?php verificaMsgECriaBalao($msgErroNome, "balaoMsg erro");?>
 
 		<input type="text" name="email" class="campoDeEntrada" placeholder="e-mail" value="<?php echo $email;?>" maxlength="<?php echo MAX_CHAR_EMAIL;?>" required>
@@ -123,9 +125,9 @@
 		<br><input type="submit" name="botaoEnviarDados" value="Cadastrar">
 
 	</form>
-	
+
 	<a href="index.php"><button type="button" class="botao botaoVoltar">Voltar</button></a>
-	
+
 </div>
 
 

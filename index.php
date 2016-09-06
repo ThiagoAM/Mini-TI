@@ -2,28 +2,34 @@
 	include 'php/funcoes.php';
 	include 'php/constantes.php';
 	$msgSucessoCadastro = $email = "";
-	$msgErroEmail = $msgErroSenha = $msgErroLogin = "";
+	$msgErroEmail = $msgErroSenha = $msgErroLogin = $msgErroConexao = "";
 	$msgFimDeSessao = "";
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		if (!empty($_GET["nome"])) {		
-			$nome = trataEntrada($_GET["nome"]);		
+
+		if (!empty($_GET["msgErroConexao"])) {
+			$_msgErroConexao = trataEntrada($_GET["msgErroConexao"]);
+		}
+
+
+		if (!empty($_GET["nome"])) {
+			$nome = trataEntrada($_GET["nome"]);
 			$primeiraPalavra = (explode(' ',trim($nome)))[0];
 			$nome = $primeiraPalavra;
 			if (!verificaSeNomeEValido($nome)) {
 				$nome = "";
 			} else {
-				$msgSucessoCadastro = "Parabéns, $nome! Você já possui um cadastro!";	
+				$msgSucessoCadastro = "Parabéns, $nome! Você já possui um cadastro!";
 			}
 		}
 		if (!empty($_GET["email"])) {
-			$email = trataEntrada($_GET["email"]);	
+			$email = trataEntrada($_GET["email"]);
 
 			if (!verificaSeEmailEValido($email)) {
-				$email = "";	
+				$email = "";
 			}
 		}
-		if (!empty($_GET["finalizaSessao"])) {	
-			session_start();		
+		if (!empty($_GET["finalizaSessao"])) {
+			session_start();
 			terminaSessao();
 			$msgFimDeSessao = "Sessão finalizada com sucesso!";
 		}
@@ -34,30 +40,29 @@
 			$msgErroEmail = "E-mail é requerido!";
 		} else {
 			$email = trataEntrada($_POST["email"]);
-
 			if (!verificaSeEmailEValido($email)) {
-				$msgErroEmail = "Formato de e-mail inválido!";	
+				$msgErroEmail = "Formato de e-mail inválido!";
 			}
 		}
 		// Verifica se 'senha' foi enviada pelo POST:
 		if (empty($_POST["senha"])) {
 			$msgErroSenha = "Digite a sua senha!";
 		} else {
-			$senha = trataEntrada($_POST["senha"]);			
-					
+			$senha = trataEntrada($_POST["senha"]);
+
 			if (!verificaSeSenhaEValida($senha)) {
 				$msgErroSenha = "Formato de senha inválido!";
-			}			
-		}	
+			}
+		}
 		if (($msgErroEmail == "") && ($msgErroSenha == "")) {
 			if (tentaLoginComoCliente($email, $senha)) {
-				// Sucesso no login:										
+				// Sucesso no login:
 				mudaDePagina("sistema.php");
-				exit();				
+				exit();
 			} else {
 				// Falha no login:
 				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
-			} 
+			}
 		}
 	}
 ?>
@@ -73,16 +78,15 @@
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 		<input type="text" name="email" class="campoDeEntrada" placeholder="e-mail" value="<?php echo $email;?>" required>
 		<?php verificaMsgECriaBalao($msgSucessoCadastro, "balaoMsg");?>
+		<?php verificaMsgECriaBalao($msgErroConexao, "balaoMsg");?>
 		<?php verificaMsgECriaBalao($msgErroEmail, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgErroLogin, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgFimDeSessao, "balaoMsg");?>
 		<input type="password" name="senha" class="campoDeEntrada" placeholder="senha" required>
 		<?php verificaMsgECriaBalao($msgErroSenha, "balaoMsg erro");?>
 		<br><input type="submit" name="botaoEnviarDados" value="Entrar">
-	</form>	
+	</form>
 	<a href="cadastro.php"><button type="button" class="botao botaoCadastrese">Cadastre-se!</button></a>
 </div>
-
-
 </body>
 </html>

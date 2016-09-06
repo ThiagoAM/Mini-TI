@@ -15,40 +15,41 @@
 
 	<?php
 		if (verificaSeSessaoExiste()) {			
-			echo "
-				<div class='caixaInterface sistema'>
-					<div class='cabecalhoSistema'>
-						<p class='bemVindo'>Olá, ".obtemPrimeiraPalavra($_SESSION["nome"])."!</p>
-						<a href='index.php?finalizaSessao=1'><button type='button' class='botao sair'>Sair</button></a>
-					</div>
-					<div class='abaInfoSistema'>
-						<p>
-						E-mail: ".$_SESSION['email']."".criaEspacos(6)."Telefone: ".$_SESSION['telefone']."".criaEspacos(6)."Endereço: ".$_SESSION["endereco"]."
-						</p>						
-					</div>
-					<div class='oqDesejaFazer'>
-						<p>O que deseja fazer ?</p>
-					</div>
-					<div class='caixaItensSistema'>
-						<br><a href='index.php'><button type='button' class='botaoItemOqDesejaFazer editarMinhaConta'>Editar Minha Conta</button></a>
-						<br><a href='index.php'><button type='button' class='botaoItemOqDesejaFazer acessarOForum'>Acessar o Fórum</button></a>
-					</div>
-				</div>
-			";
+			apresentaOpcoesBasicasDoSistema();
 		} else {					
-			echo "
-				<div class='caixaInterface erro'>
-					<p>
-					Acesso Negado.
-					<br>Faça login antes de acessar o sistema!
-					</p>
-					<br><a href='index.php'><button type='button' class='botao botaoVoltarInterfaceErro'>Voltar</button></a>
-				</div>
-			";
+			apresentaTelaDeErro();
 		}
 	?>
-
-	
-
 </body>
 </html>
+
+<?php
+	function apresentaOpcoesBasicasDoSistema() {
+		echo "
+			<div class='caixaInterface sistema'>
+				<div class='cabecalhoSistema'>
+					<p class='bemVindo'>Olá, ".obtemPrimeiraPalavra($_SESSION["nome"])."!</p>
+					<a href='index.php?finalizaSessao=1'><button type='button' class='botao sair'>Sair</button></a>
+				</div>
+				<div class='abaInfoSistema'>
+					<p>
+					E-mail: ".$_SESSION['email']."".criaEspacos(6)."Telefone: ".$_SESSION['telefone']."".criaEspacos(6)."Endereço: ".$_SESSION["endereco"]."
+					</p>						
+				</div>
+				<div class='oqDesejaFazer'>
+					<p>O que deseja fazer ?</p>
+				</div>
+				<div class='caixaItensSistema'>
+					<br><a href='editarConta.php'><button type='button' class='botaoItemOqDesejaFazer editarMinhaConta'>Editar Minha Conta</button></a>
+					<br><a href='index.php'><button type='button' class='botaoItemOqDesejaFazer acessarOForum'>Acessar o Fórum</button></a>
+				</div>
+			</div>
+		";
+	}
+?>
+
+
+
+
+
+
