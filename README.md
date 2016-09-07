@@ -5,12 +5,13 @@ Sistema empresarial baseado em PHP e mySQL. Este projeto ainda está incompleto,
 > Proteção contra SQL-Injection;
 > Sessões PHP;
 > Criptografia de senhas;
+> Alteração de dados cadastrais pelo usuário;
 
 Funcionalidades ainda por serem desenvolvidas:
-> Alteração de dados cadastrais pelo usuário;
 > Fórum empresarial;
 > Implementação de Funcionários (Também são moderadores do fórum);
 > Validação de e-mail (confirmação enviada por e-mail);
+> Implementação do Google reCAPCHA;
 > E muito mais!
 
 Para testar o sistema:
