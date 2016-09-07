@@ -107,17 +107,28 @@ span {
 	background-color: #607D8B;
     -webkit-border-radius: 10px;
 }
+.caixaInterface.sistema {
+	background-color: #EEEEEE;
+	width: 70%;
+	left: 15%;
+	height: 47vw;
+	top: 9%;
+}
+	.caixaInterface.editarSenha {
+		padding-top: 2.5%;
+		width: 60%;
+		left: 20%;
+		height: 36%;
+		background-color: #607D8B;
+		top: 27.5%;
+	}
 	.caixaInterface.editarDados {
 		padding-top: 2.5%;
-		/*width: 70%;*/
-		width: 60%;
-		/*left: 15%;*/
-		left: 20%;
-		/*height: 65%;*/
-		height: 60%;
+		width: 65%;
+		left: 17.5%;
+		height: 63%;
 		background-color: #607D8B;
 		top: 18.75%;
-
 	}
 	.caixaInterface.login {
 		width: 40%;
@@ -141,13 +152,7 @@ span {
 
 
 
-	.caixaInterface.sistema {
-		background-color: #EEEEEE;
-		width: 70%;
-		left: 15%;
-		height: 47vw;
-		top: 9%;
-	}
+
 		.cabecalhoSistema {
 			position: absolute;
 			width: 100%;

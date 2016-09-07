@@ -2,7 +2,7 @@
 
 	// - - - - - - - - - - - - - MYSQL - - - - - - - - - - - - - - -
 
-	function atualizaDadosDeCliente($nome, $email, $senha, $telefone, $endereco) {
+	function atualizaDadosDeCliente($nome, $email, $telefone, $endereco) {
 		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
 		// Verifica conexão:
 		if (!$conexao) {
@@ -21,6 +21,31 @@
 			$comandoSQL->close();
 			mysqli_close($conexao);
 			atribuiValoresDaSessao($_SESSION["idCliente"], $nome, $email, $_SESSION["senha"], $telefone, $endereco); // remover isso...
+			return true;
+		}
+	}
+
+	function atualizaSenhaDeCliente($senha) {
+		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
+		// Verifica conexão:
+		if (!$conexao) {
+			// Falha na conexão:
+			return false;
+		} else {
+			// Sucesso na conexão:
+			$id = $_SESSION["idCliente"];
+			$email = $_SESSION["email"];
+			$senhaCriptografada = criptografarSenha($senha);
+
+			$comandoSQL = $conexao->prepare('UPDATE clientes SET senha=? WHERE idCliente=? AND email=?');
+			if (!$comandoSQL) {
+				return false;
+			}
+			$comandoSQL->bind_param('sss', $senhaCriptografada, $id, $email);
+			$comandoSQL->execute();
+			$comandoSQL->close();
+			mysqli_close($conexao);
+			atribuiValoresDaSessao($_SESSION["idCliente"], $_SESSION["nome"], $email, $senhaCriptografada, $_SESSION["telefone"], $_SESSION["endereco"]);
 			return true;
 		}
 	}
@@ -53,11 +78,7 @@
 	}
 
 	function verificaSeSenhaEstaCorreta($senha, $senhaCriptografada) {
-		if (password_verify($senha, $senhaCriptografada)) {
-			return true;
-		} else {
-			return false;
-		}
+		return password_verify($senha, $senhaCriptografada);
 	}
 
 	function tentaLoginComoCliente($email, $senha) {

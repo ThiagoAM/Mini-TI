@@ -62,7 +62,7 @@
 			if (verificaSeFormularioSemSenhaEValido($msgErroNome, $msgErroEmail, $msgErroTelefone, $msgErroEndereco)) {
 				// Grava na base de dados:
 				if (verificaSeFormularioEValido($msgErroNome, $msgErroEmail, $msgErroSenha, $msgErroTelefone, $msgErroEndereco)) {
-					if (atualizaDadosDeCliente($nome, $email, $senha, $telefone, $endereco)) {
+					if (atualizaDadosDeCliente($nome, $email, $telefone, $endereco)) {
 						mudaDePagina("sistema.php");
 					} else {
 						$msgErroGeral = "Não foi possível conectar ao servidor!<br>Tente novamente mais tarde.";
@@ -72,10 +72,6 @@
 			}
 		}
 	}
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +110,7 @@
 						<br><input type="submit" name="botaoEnviarDados" value="Efetuar Alterações">
 					</form>
 
-					<a href=""><button type="button" class="botao botaoCadastrese">Alterar Senha</button></a>
+					<a href="editarSenha.php"><button type="button" class="botao botaoCadastrese">Alterar Senha</button></a>
 					<br><a href=""><button type="button" class="botao excluirConta">Excluir Conta</button></a>
 
 				</div>

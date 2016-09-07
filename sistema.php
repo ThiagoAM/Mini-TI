@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>	
+<head>
 	<meta charset="utf-8">
 	<title>Bem-Vindo(a) ao sistema Mini TI!</title>
 	<link href="css/estilos_gerais.css" rel="stylesheet" type="text/css">
@@ -14,10 +14,10 @@
 <body>
 
 	<?php
-		if (verificaSeSessaoExiste()) {			
+		if (verificaSeSessaoExiste()) {
 			apresentaOpcoesBasicasDoSistema();
-		} else {					
-			apresentaTelaDeErro();
+		} else {
+			apresentaTelaDeErro("Faça login para acessar o sistema!");
 		}
 	?>
 </body>
@@ -34,7 +34,7 @@
 				<div class='abaInfoSistema'>
 					<p>
 					E-mail: ".$_SESSION['email']."".criaEspacos(6)."Telefone: ".$_SESSION['telefone']."".criaEspacos(6)."Endereço: ".$_SESSION["endereco"]."
-					</p>						
+					</p>
 				</div>
 				<div class='oqDesejaFazer'>
 					<p>O que deseja fazer ?</p>
@@ -47,9 +47,3 @@
 		";
 	}
 ?>
-
-
-
-
-
-
