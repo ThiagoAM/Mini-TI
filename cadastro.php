@@ -48,7 +48,7 @@
 			// Verifica se ambas as senhas são iguais:
 			if ($senha === $confirmaSenha) {
 				if (!verificaSeSenhaEValida($senha)) {
-					$msgErroSenha = "Formato de senha inválido!";
+					$msgErroSenha = "A senha deve ter no mínimo ".MIN_CHAR_SENHA." caracteres!";
 				}
 			} else {
 				$msgErroSenha = "Ambas as senhas devem ser IDÊNTICAS!";
@@ -74,22 +74,6 @@
 			} else {
 				$msgErroNome = "Erro no servidor, tente mais tarde!";
 			}
-
-			// // Cria uma conexão:
-			// $conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
-			// // Verifica conexão:
-			// if (!$conexao) {
-			// 	// Falha na conexão:
-			// 	die("A conexão com o banco de dados falhou. Erro: " . mysqli_connect_error());
-			// } else {
-			// 	// Sucesso na conexão:
-			// 	$comandoSQL = "INSERT INTO clientes (nome, email, senha, telefone, endereco) VALUES ('$nome', '$email', '$senha', '$telefone', '$endereco')";
-			// 	if (!mysqli_query($conexao, $comandoSQL)) {
-	    	// 		echo "<br>Erro ao inserir dados no BD: " . $comandoSQL . "<br>" . mysqli_error($conexao);
-			// 	}
-			// 	mysqli_close($conexao); // Encerra a conexão.
-			// 	mudaDePagina("index.php?nome=$nome&email=$email");
-			// }
 		}
 	}
 ?>

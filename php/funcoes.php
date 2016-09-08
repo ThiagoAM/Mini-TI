@@ -260,7 +260,9 @@
 
 
 	function verificaSeSenhaEValida($senha) {
-		return (strlen($senha) <= MAX_CHAR_SENHA);
+		$tamanhoDaSenha = strlen($senha);
+		return ($tamanhoDaSenha >= MIN_CHAR_SENHA && $tamanhoDaSenha <= MAX_CHAR_SENHA);
+		// return (strlen($senha) <= MAX_CHAR_SENHA);
 	}
 
 

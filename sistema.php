@@ -15,25 +15,23 @@
 
 	<?php
 		if (verificaSeSessaoExiste()) {
-			apresentaOpcoesBasicasDoSistema();
-		} else {
-			apresentaTelaDeErro("Faça login para acessar o sistema!");
-		}
 	?>
-</body>
-</html>
-
-<?php
-	function apresentaOpcoesBasicasDoSistema() {
-		echo "
 			<div class='caixaInterface sistema'>
 				<div class='cabecalhoSistema'>
-					<p class='bemVindo'>Olá, ".obtemPrimeiraPalavra($_SESSION["nome"])."!</p>
+					<p class='bemVindo'>Olá, <?php echo obtemPrimeiraPalavra($_SESSION["nome"])."!"; ?></p>
 					<a href='index.php?finalizaSessao=1'><button type='button' class='botao sair'>Sair</button></a>
 				</div>
 				<div class='abaInfoSistema'>
 					<p>
-					E-mail: ".$_SESSION['email']."".criaEspacos(6)."Telefone: ".$_SESSION['telefone']."".criaEspacos(6)."Endereço: ".$_SESSION["endereco"]."
+					<?php
+						echo "Email: ".$_SESSION["email"];
+						if (!empty($_SESSION["telefone"])) {
+							echo criaEspacos(6)."Telefone: ".$_SESSION["telefone"];
+						}
+						if (!empty($_SESSION["endereco"])) {
+							echo criaEspacos(6)."Endereço: ".$_SESSION["endereco"];
+						}
+					?>
 					</p>
 				</div>
 				<div class='oqDesejaFazer'>
@@ -41,9 +39,14 @@
 				</div>
 				<div class='caixaItensSistema'>
 					<br><a href='editarConta.php'><button type='button' class='botaoItemOqDesejaFazer editarMinhaConta'>Editar Minha Conta</button></a>
-					<br><a href='index.php'><button type='button' class='botaoItemOqDesejaFazer acessarOForum'>Acessar o Fórum</button></a>
+					<br><a href=''><button type='button' class='botaoItemOqDesejaFazer acessarOForum'>Acessar o Fórum</button></a>
 				</div>
 			</div>
-		";
-	}
-?>
+
+		<?php
+		} else {
+			apresentaTelaDeErro("Faça login para acessar o sistema!");
+		}
+		?>
+</body>
+</html>

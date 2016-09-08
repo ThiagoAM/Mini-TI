@@ -114,36 +114,53 @@ span {
 	height: 47vw;
 	top: 9%;
 }
-	.caixaInterface.editarSenha {
-		padding-top: 2.5%;
-		width: 60%;
-		left: 20%;
-		height: 36%;
-		background-color: #607D8B;
-		top: 27.5%;
+.caixaInterface.deletarConta {
+	padding-top: 2.5%;
+	width: 100%;
+	left: 0;
+	height: 37%;
+	top: 30%;
+	background-color: #934F3D;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 	0px;
+}
+	.caixaInterface.deletarConta p {
+		font-size: 2.5vw;
+		text-align: center;
 	}
-	.caixaInterface.editarDados {
-		padding-top: 2.5%;
-		width: 65%;
-		left: 17.5%;
-		height: 63%;
-		background-color: #607D8B;
-		top: 18.75%;
-	}
-	.caixaInterface.login {
-		width: 40%;
-		left: 30%;
-		padding-top: 2.5%;
-		height: 17.75vw;
-		top: 25%;
-	}
-	.caixaInterface.cadastro {
-		width: 40%;
-		left: 30%;
-		padding-top: 2.5%;
-		height: 32.5vw;
-		top: 14.375%;
-	}
+
+.caixaInterface.editarSenha {
+	padding-top: 2.5%;
+	width: 60%;
+	left: 20%;
+	height: 36%;
+	background-color: #607D8B;
+	top: 27.5%;
+}
+.caixaInterface.editarDados {
+	padding-top: 2.5%;
+	width: 65%;
+	left: 17.5%;
+	height: 63%;
+	background-color: #607D8B;
+	top: 18.75%;
+}
+.caixaInterface.login {
+	width: 40%;
+	left: 30%;
+	padding-top: 2.5%;
+	height: 17.75vw;
+	top: 25%;
+}
+.caixaInterface.cadastro {
+	width: 40%;
+	left: 30%;
+	padding-top: 2.5%;
+	height: 32.5vw;
+	top: 14.375%;
+}
 
 
 
@@ -162,6 +179,14 @@ span {
 			border-top-left-radius: 10px;
 			border-top-right-radius: 10px;
 			top: 0;
+		}
+
+		.cabecalhoSistema.editarDadosCadastrais {
+			background-color: #6D7297;
+		}
+
+		.cabecalhoSistema.deletarConta {
+			background-color: #934F3D;
 		}
 
 			p.bemVindo {
@@ -185,9 +210,7 @@ span {
 				border-bottom-left-radius: 10px;
 			}
 
-			.cabecalhoSistema.editarDadosCadastrais {
-				background-color: #6D7297;
-			}
+
 
 		.abaInfoSistema {
 			position: absolute;
@@ -286,9 +309,15 @@ span {
 	font-size: 1.5vw;
 	margin-top: 2.25%;
 }
+.campoDeEntrada.senhaExcluirConta {
+	position: relative;
+	width: 40%;
+	left: 30%;
+	font-size: 1.5vw;
+	margin-top: 2.25%;	
+}
 
 .botao {
-
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 300;
     background-color: #01579B;
@@ -298,6 +327,15 @@ span {
     border-radius: 5px;
     font-size: 1.25vw;
     color: white;
+}
+.botao.amareloEscuro {
+	width: 25%;
+	left: 37.5%;
+	margin-top: 1.75%;
+	padding-top: 1.7%;
+	padding-bottom: 1.7%;
+	position: relative;
+	background-color: #B87462;
 }
 	.botao.excluirConta {
 		width: 25%;

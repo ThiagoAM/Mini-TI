@@ -111,7 +111,7 @@
 					</form>
 
 					<a href="editarSenha.php"><button type="button" class="botao botaoCadastrese">Alterar Senha</button></a>
-					<br><a href=""><button type="button" class="botao excluirConta">Excluir Conta</button></a>
+					<br><a href="deletarConta.php"><button type="button" class="botao excluirConta">Excluir Conta</button></a>
 
 				</div>
 			</div>

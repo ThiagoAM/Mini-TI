@@ -10,7 +10,6 @@
 			$_msgErroConexao = trataEntrada($_GET["msgErroConexao"]);
 		}
 
-
 		if (!empty($_GET["nome"])) {
 			$nome = trataEntrada($_GET["nome"]);
 			$primeiraPalavra = (explode(' ',trim($nome)))[0];
@@ -67,17 +66,8 @@
 				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
 			} else if ($fezLogin === null) {
 				// Falha no login:
-				$msgErroLogin = "Não foi possível conectar ao servidor, volte mais tarde!";
+				$msgErroConexao = "Não foi possível conectar ao servidor, volte mais tarde!";
 			}
-
-			/*if (tentaLoginComoCliente($email, $senha)) {
-				// Sucesso no login:
-				mudaDePagina("sistema.php");
-				exit();
-			} else {
-				// Falha no login:
-				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
-			}*/
 		}
 	}
 ?>
@@ -93,7 +83,7 @@
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 		<input type="text" name="email" class="campoDeEntrada" placeholder="e-mail" value="<?php echo $email;?>" required>
 		<?php verificaMsgECriaBalao($msgSucessoCadastro, "balaoMsg");?>
-		<?php verificaMsgECriaBalao($msgErroConexao, "balaoMsg");?>
+		<?php verificaMsgECriaBalao($msgErroConexao, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgErroEmail, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgErroLogin, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgFimDeSessao, "balaoMsg");?>
