@@ -1,10 +1,15 @@
 <?php
 	include 'php/funcoes.php';
 	include 'php/constantes.php';
+	$mensagemGeral = "";
 	$msgSucessoCadastro = $email = "";
 	$msgErroEmail = $msgErroSenha = $msgErroLogin = $msgErroConexao = "";
 	$msgFimDeSessao = "";
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+		if (!empty($_GET["mensagemGeral"])) {
+			$mensagemGeral = trataEntrada($_GET["mensagemGeral"]);
+		}
 
 		if (!empty($_GET["msgErroConexao"])) {
 			$_msgErroConexao = trataEntrada($_GET["msgErroConexao"]);
@@ -50,7 +55,7 @@
 			$senha = trataEntrada($_POST["senha"]);
 
 			if (!verificaSeSenhaEValida($senha)) {
-				$msgErroSenha = "Formato de senha inválido!";
+				$msgErroLogin = "Falha ao tentar login, email e/ou senha inválidos!";
 			}
 		}
 		if (($msgErroEmail == "") && ($msgErroSenha == "")) {
@@ -87,6 +92,7 @@
 		<?php verificaMsgECriaBalao($msgErroEmail, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgErroLogin, "balaoMsg erro");?>
 		<?php verificaMsgECriaBalao($msgFimDeSessao, "balaoMsg");?>
+		<?php verificaMsgECriaBalao($mensagemGeral, "balaoMsg");?>
 		<input type="password" name="senha" class="campoDeEntrada" placeholder="senha" required>
 		<?php verificaMsgECriaBalao($msgErroSenha, "balaoMsg erro");?>
 		<br><input type="submit" name="botaoEnviarDados" value="Entrar">

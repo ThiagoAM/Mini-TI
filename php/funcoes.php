@@ -2,6 +2,25 @@
 
 	// - - - - - - - - - - - - - MYSQL - - - - - - - - - - - - - - -
 
+	function deletaCliente($idCliente, $email) {
+		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
+		// Verifica conexão:
+		if (!$conexao) {
+			// Falha na conexão:
+			return false;
+		} else {
+			$comandoSQL = $conexao->prepare('DELETE FROM clientes WHERE idCliente=? AND email=?');
+			if (!$comandoSQL) {
+				return false;
+			}
+			$comandoSQL->bind_param('ss', $idCliente, $email);
+			$comandoSQL->execute();
+			$comandoSQL->close();
+			mysqli_close($conexao);
+			return true;
+		}
+	}
+
 	function atualizaDadosDeCliente($nome, $email, $telefone, $endereco) {
 		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
 		// Verifica conexão:
@@ -81,7 +100,7 @@
 		return password_verify($senha, $senhaCriptografada);
 	}
 
-	function tentaLoginComoCliente($email, $senha) {
+	function verificaSeEmailESenhaEstaoCorretos($email, $senha) {
 		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
 		// Verifica conexão:
 		if (!$conexao) {
@@ -99,7 +118,6 @@
 			if ($resultadoSQL->num_rows === 1) {
 				$coluna = $resultadoSQL->fetch_assoc();
 				if (verificaSeSenhaEstaCorreta($senha, $coluna["senha"])) {
-					iniciaEAtribuiValoresSessao($coluna["idCliente"], $coluna["nome"], $coluna["email"], $coluna["senha"], $coluna["telefone"], $coluna["endereco"]);
 					$comandoSQL->close();
 					mysqli_close($conexao);
 					return true;
@@ -113,6 +131,40 @@
 				mysqli_close($conexao);
 				return false;
 			}
+		}
+	}
+
+	function tentaLoginComoCliente($email, $senha) {
+
+		if (verificaSeEmailESenhaEstaoCorretos($email, $senha)) {
+			// ------ ALTERAR O FUNCIONAMENTO DESTA FUNÇÃO: -------
+			$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
+			if (!$conexao) {
+				// Falha na conexão:
+				return null;
+			} else {
+				// Sucesso na conexão:
+				$comandoSQL = $conexao->prepare('SELECT * FROM clientes WHERE email = ?');
+				if (!$comandoSQL) {
+					return false;
+				}
+				$comandoSQL->bind_param('s', $email);
+				$comandoSQL->execute();
+				$resultadoSQL = $comandoSQL->get_result();
+				if ($resultadoSQL->num_rows === 1) {
+					$coluna = $resultadoSQL->fetch_assoc();
+					iniciaEAtribuiValoresSessao($coluna["idCliente"], $coluna["nome"], $coluna["email"], $coluna["senha"], $coluna["telefone"], $coluna["endereco"]);
+					$comandoSQL->close();
+					mysqli_close($conexao);
+					return true;
+				} else {
+					$comandoSQL->close();
+					mysqli_close($conexao);
+					return false;
+				}
+			}
+		} else {
+			return false;
 		}
 	}
 
