@@ -1,5 +1,5 @@
 # Mini-TI
-Sistema empresarial baseado em PHP e mySQL. Este projeto ainda está incompleto, suas funcionalidades atuais são:
+Sistema baseado em PHP e mySQL. Este projeto ainda está incompleto, suas funcionalidades atuais são:
 > Criação de clientes;
 > Sistema de login;
 > Proteção contra SQL-Injection;
