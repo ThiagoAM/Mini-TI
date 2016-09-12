@@ -39,7 +39,8 @@
 			$comandoSQL->execute();
 			$comandoSQL->close();
 			mysqli_close($conexao);
-			atribuiValoresDaSessao($_SESSION["idCliente"], $nome, $email, $_SESSION["senha"], $telefone, $endereco); // remover isso...
+			//atribuiValoresDaSessao($_SESSION["idCliente"], $nome, $email, $_SESSION["senha"], $telefone, $endereco); // remover isso...
+			atribuiValoresDaSessao($_SESSION["idCliente"]);
 			return true;
 		}
 	}
@@ -64,7 +65,8 @@
 			$comandoSQL->execute();
 			$comandoSQL->close();
 			mysqli_close($conexao);
-			atribuiValoresDaSessao($_SESSION["idCliente"], $_SESSION["nome"], $email, $senhaCriptografada, $_SESSION["telefone"], $_SESSION["endereco"]);
+			//atribuiValoresDaSessao($_SESSION["idCliente"], $_SESSION["nome"], $email, $senhaCriptografada, $_SESSION["telefone"], $_SESSION["endereco"]);
+			atribuiValoresDaSessao($_SESSION["idCliente"]);
 			return true;
 		}
 	}
@@ -134,7 +136,9 @@
 		}
 	}
 
-	function tentaLoginComoCliente($email, $senha) {
+	/*function tentaLoginComoCliente($email, $senha) {
+
+		return iniciaEAtribuiValoresSessao($email, $senha);
 
 		if (verificaSeEmailESenhaEstaoCorretos($email, $senha)) {
 			// ------ ALTERAR O FUNCIONAMENTO DESTA FUNÇÃO: -------
@@ -166,7 +170,7 @@
 		} else {
 			return false;
 		}
-	}
+	}*/
 
 	function verificaSeEmailJaExiste($email) {
 		$conexao = mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
@@ -230,6 +234,108 @@
 		}
 	}
 
+// - - - - - - - - - - - - - - SESSÃO  - - - - - - - - - - - - - - -
+
+function atribuiValoresDaSessao($idCliente) {
+	$conexao = iniciaConexao();
+	if (!$conexao) {
+		return false;
+	} else {
+		$comandoSQL = $conexao->prepare('SELECT * FROM clientes WHERE idCliente = ?');
+		if (!$comandoSQL) {
+			return false;
+		}
+		$comandoSQL->bind_param('s', $idCliente);
+		$comandoSQL->execute();
+		$colunaSQL = $comandoSQL->get_result()->fetch_assoc();
+		$_SESSION["idCliente"] = $colunaSQL["idCliente"];
+		$_SESSION["nome"] = $colunaSQL["nome"];
+		$_SESSION["email"] = $colunaSQL["email"];
+		$_SESSION["senha"] = $colunaSQL["senha"];
+		$_SESSION["telefone"] = $colunaSQL["telefone"];
+		$_SESSION["endereco"] = $colunaSQL["endereco"];
+		finalizaConexao($conexao);
+		return true;
+	}
+}
+
+
+function tentaIniciarUmaSessao($email, $senha) {
+
+	$emailESenhaEstaoCertos = verificaSeEmailESenhaEstaoCorretos($email, $senha); // Retorno pode ser: true, false ou null.
+	if ($emailESenhaEstaoCertos != true) {
+		return $emailESenhaEstaoCertos;
+	} else {
+		$idCliente = obtemIdDoCliente($email);
+		if (!verificaSeSessaoExiste()) {
+			session_start();
+			atribuiValoresDaSessao($idCliente);
+			return true;
+		} else {
+			terminaSessao();
+			iniciaEAtribuiValoresSessao($idCliente);
+		}
+	}
+}
+
+function terminaSessao() {
+	if (verificaSeSessaoExiste() === true) {
+		// Remove todas as variáveis da sessão:
+		session_unset();
+		// Destroi a sessão:
+		session_destroy();
+	}
+}
+
+function verificaSeSessaoExiste() {
+	if ((!isset($_SESSION["nome"])) && (!isset($_SESSION["email"])) && (!isset($_SESSION["telefone"])) && (!isset($_SESSION["endereco"])) && (!isset($_SESSION["senha"]))) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+
+
+
+
+// - - - - - - - - - - - - - - CONEXÃO  - - - - - - - - - - - - - - -
+
+function iniciaConexao() {
+	return mysqli_connect("".HOSPEDEIRO_BD.":".PORTA_BD."", USUARIO_BD, SENHA_BD, NOME_BD);
+}
+
+function finalizaConexao($conexao) {
+	mysqli_close($conexao);
+}
+
+// - - - - - - - - - - - - - - IP  - - - - - - - - - - - - - - -
+
+function identificaIpDoUsuario() {
+	return getenv('HTTP_CLIENT_IP')?:
+	getenv('HTTP_X_FORWARDED_FOR')?:
+	getenv('HTTP_X_FORWARDED')?:
+	getenv('HTTP_FORWARDED_FOR')?:
+	getenv('HTTP_FORWARDED')?:
+	getenv('REMOTE_ADDR');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// - - - - - - - - - - - OUTRAS FUNÇÕES - - - - - - - - - - - - - -
 
@@ -247,42 +353,40 @@
 	}
 
 
-	function iniciaEAtribuiValoresSessao($idCliente, $nome, $email, $senha, $telefone, $endereco) {
-		if (!verificaSeSessaoExiste()) {
-			session_start();
-			atribuiValoresDaSessao($idCliente, $nome, $email, $senha, $telefone, $endereco);
+
+
+
+	function obtemIdDoCliente($email) {
+		$conexao = iniciaConexao();
+		if (!$conexao) {
+			return null;
 		} else {
-			terminaSessao();
-			iniciaEAtribuiValoresSessao($idCliente, $nome, $email, $senha, $telefone, $endereco);
+			$comandoSQL = $conexao->prepare('SELECT * FROM clientes WHERE email = ?');
+			if (!$comandoSQL) {
+				return null;
+			} else {
+				$comandoSQL->bind_param('s', $email);
+				$comandoSQL->execute();
+				$colunaSQL = $comandoSQL->get_result()->fetch_assoc();
+				$idCliente = $colunaSQL["idCliente"];
+				$comandoSQL->close();
+				finalizaConexao($conexao);
+				return $idCliente;
+			}
 		}
 	}
 
-	function atribuiValoresDaSessao($idCliente, $nome, $email, $senha, $telefone, $endereco) {
+
+	/*function atribuiValoresDaSessao($idCliente, $nome, $email, $senha, $telefone, $endereco) {
 		$_SESSION["idCliente"] = $idCliente;
 		$_SESSION["nome"] = $nome;
 		$_SESSION["email"] = $email;
 		$_SESSION["senha"] = $senha;
 		$_SESSION["telefone"] = $telefone;
 		$_SESSION["endereco"] = $endereco;
-	}
+	}*/
 
-	function terminaSessao() {
 
-		if (verificaSeSessaoExiste() === true) {
-			// Remove todas as variáveis da sessão:
-			session_unset();
-			// Destroi a sessão:
-			session_destroy();
-		}
-	}
-
-	function verificaSeSessaoExiste() {
-		if ((!isset($_SESSION["nome"])) && (!isset($_SESSION["email"])) && (!isset($_SESSION["telefone"])) && (!isset($_SESSION["endereco"])) && (!isset($_SESSION["senha"]))) {
-			return false;
-		} else {
-			return true;
-		}
-	}
 
 	function criaEspacos($quantidade) {
 		$contador = 0;
@@ -302,9 +406,9 @@
 		return (explode(' ',trim($string)))[0];
 	}
 
-	function verificaSeFormularioEValido($msgErroNome, $msgErroEmail, $msgErroSenha, $msgErroTelefone, $msgErroEndereco) {
+	/*function verificaSeFormularioEValido($msgErroNome, $msgErroEmail, $msgErroSenha, $msgErroTelefone, $msgErroEndereco) {
 		return (($msgErroNome === "") && ($msgErroEmail === "") && ($msgErroSenha === "") && ($msgErroTelefone === "") && ($msgErroEndereco === ""));
-	}
+	}*/
 
 	function verificaSeFormularioSemSenhaEValido($msgErroNome, $msgErroEmail, $msgErroTelefone, $msgErroEndereco) {
 		return (($msgErroNome === "") && ($msgErroEmail === "") && ($msgErroTelefone === "") && ($msgErroEndereco === ""));

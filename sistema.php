@@ -19,7 +19,8 @@
 			<div class='caixaInterface sistema'>
 				<div class='cabecalhoSistema'>
 					<p class='bemVindo'>Olá, <?php echo obtemPrimeiraPalavra($_SESSION["nome"])."!"; ?></p>
-					<a href='index.php?finalizaSessao=1'><button type='button' class='botao sair'>Sair</button></a>
+					<?php $link = 'index.php?email='.$_SESSION["email"].'&finalizaSessao=1';?>
+					<a href="<?php echo $link;?>"><button type='button' class='botao sair'>Sair</button></a>
 				</div>
 				<div class='abaInfoSistema'>
 					<p>

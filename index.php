@@ -60,7 +60,7 @@
 		}
 		if (($msgErroEmail == "") && ($msgErroSenha == "")) {
 
-			$fezLogin = tentaLoginComoCliente($email, $senha);
+			$fezLogin = tentaIniciarUmaSessao($email, $senha);
 
 			if ($fezLogin === true) {
 				// Sucesso no login:

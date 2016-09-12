@@ -131,6 +131,14 @@ span {
 	background-color: #934F3D;
 	top: 35%;
 }
+.caixaInterface.miniCaixaDeSenha {
+	padding-top: 2.5%;
+	width: 60%;
+	left: 20%;
+	height: 17.5%;
+	background-color: #607D8B;
+	top: 35%;
+}
 
 
 	.caixaInterface.deletarConta p {
@@ -150,9 +158,9 @@ span {
 	padding-top: 2.5%;
 	width: 65%;
 	left: 17.5%;
-	height: 63%;
+	height: 72%;
 	background-color: #607D8B;
-	top: 18.75%;
+	top: 15.75%;
 }
 .caixaInterface.login {
 	width: 40%;
