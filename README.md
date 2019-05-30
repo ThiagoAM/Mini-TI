@@ -10,5 +10,5 @@ Sistema baseado em PHP e mySQL. Suas funcionalidades atuais são:
 Para testar o sistema:
 
 * Passo 1: Crie a base de dados com código SQL localizado no diretório /sql/criarBaseDeDados.sql;
-* Passo 2: Edite o arquivo 'constantes.php' de acordo com as configurações de seu servidor;
+* Passo 2: Edite o arquivo 'constantes.php' de acordo com as configurações de seu servidor local;
 * Passo 3: Execute o sistema! 
