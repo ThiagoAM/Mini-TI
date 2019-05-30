@@ -7,13 +7,6 @@ Sistema baseado em PHP e mySQL. Este projeto ainda está incompleto, suas funcio
 > Criptografia de senhas;
 > Alteração de dados cadastrais pelo usuário;
 
-Funcionalidades ainda por serem desenvolvidas:
-> Fórum empresarial;
-> Implementação de Funcionários (Também são moderadores do fórum);
-> Validação de e-mail (confirmação enviada por e-mail);
-> Implementação do Google reCAPCHA;
-> E muito mais!
-
 Para testar o sistema:
 
 * Passo 1: Crie a base de dados com código SQL localizado no diretório /sql/criarBaseDeDados.sql;
